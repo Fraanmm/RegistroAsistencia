@@ -34,7 +34,7 @@ export class LoginPage implements OnInit {
     var usuario = JSON.parse(localStorage.getItem('usuario'));
 
     if(usuario.nombre == f.nombre && usuario.password == f.password){
-      this.router.navigate(['/home']); 
+      this.router.navigate(['/principal']); 
     }else{
       const alert = await this.alertController.create({
         header:'Datos Incorrectos',

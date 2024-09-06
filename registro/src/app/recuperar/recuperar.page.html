@@ -3,14 +3,27 @@
     <ion-buttons slot="start">
       <ion-back-button></ion-back-button>
     </ion-buttons>
-    <ion-title></ion-title>
+    <ion-title>Recuperar Contraseña</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">recuperar</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <div id="container">
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>Recuperación de Contraseña</ion-card-title>
+      </ion-card-header>
+
+      <ion-card-content>
+        <ion-list>
+          <ion-item>
+            <ion-input [(ngModel)]="usuario" name="usuario" placeholder="Ingrese su nombre de usuario" required></ion-input>
+          </ion-item>
+        </ion-list>
+
+        <br>
+        <ion-button expand="block" (click)="recuperarContra()">Recuperar</ion-button>
+      </ion-card-content>
+    </ion-card>
+  </div>
 </ion-content>

@@ -1,58 +1,60 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title></ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Iniciar Sesión</ion-title>
   </ion-toolbar>
 </ion-header>
 
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Iniciar Sesión</ion-title>
+    </ion-toolbar>
+  </ion-header>
 
-<ion-content>
+  <div id="container">
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>
+          <h1>Bienvenido/a</h1>
+        </ion-card-title>
+        <ion-card-subtitle>Accede a tu cuenta</ion-card-subtitle>
+      </ion-card-header>
 
-<ion-card>
+      <ion-card-content>
+        
+        <form (ngSubmit)="iniciarSesion()">
+          <ion-list>
+            <ion-item>
+              <ion-input [(ngModel)]="usuario" name="usuario" label="Correo Electrónico" type="email" placeholder="Ingrese su correo" required></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-input [(ngModel)]="password" name="password" label="Contraseña" type="password" placeholder="Ingrese su contraseña" required></ion-input>
+            </ion-item>
+          </ion-list>
 
-  <ion-card-header>
-    <ion-card-title>Registro de Usuario</ion-card-title>
-  </ion-card-header>
+          <br>
+          <ion-button type="submit">
+            Iniciar Sesión
+          </ion-button>
+        </form>
 
-  <ion-card-content>
-  
-    <form [formGroup]="formularioLogin">
-
-      <ion-item>
-        <ion-label position="floating">Nombre de Usuario</ion-label>
-        <ion-input formControlName="nombre"></ion-input>
-      </ion-item>
-    
-      <ion-item>
-        <ion-label position="floating">Contraseña</ion-label>
-        <ion-input formControlName="password" type="password"></ion-input>
-      </ion-item>
-    
-    </form>
-
-    <br>
-
-    <ion-button (click)="ingresar()">
-      Ingresar
-    </ion-button>
-
-  </ion-card-content>
-
-</ion-card>
-
+        <ion-button expand="block" color="light" [routerLink]="['/recuperar']">
+          ¿Olvidaste tu contraseña?
+        </ion-button>
+      </ion-card-content>
+    </ion-card>
+  </div>
 </ion-content>
 
 <ion-footer>
-
   <ion-toolbar>
-
     <ion-buttons slot="end">
-
-        <ion-button [routerLink] = "['/registro']">
-          Registrarse
-        </ion-button>
-
+      <ion-button [routerLink]="['/registro']">
+        ¿No tienes cuenta? Regístrate
+      </ion-button>
     </ion-buttons>
-    
   </ion-toolbar>
-
 </ion-footer>

@@ -1,12 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import{
-  FormGroup,
-  FormControl,
-  Validators,
-  FormBuilder
-} from '@angular/forms';
-import { AlertController } from '@ionic/angular';
-import { Router } from '@angular/router';
+import { Router, NavigationExtras } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -15,34 +8,36 @@ import { Router } from '@angular/router';
 })
 export class LoginPage implements OnInit {
 
-  formularioLogin: FormGroup;
+  usuario = '';
+  password = '';
 
-  constructor(public fb: FormBuilder, public alertController: AlertController ) {
-    this.formularioLogin = this.fb.group({
-      'nombre': new FormControl("",Validators.required),
-      'password': new FormControl("",Validators.required),
+  constructor(private router: Router) {
+    const navegacion = this.router.getCurrentNavigation();
+    const state = navegacion?.extras.state as {
+      usuario: string;
+      password: string;
+    };
 
-    })
-   }
-
-  ngOnInit() {
-  }
-
-  async ingresar(){
-    var f = this.formularioLogin.value;
-
-    var usuario = JSON.parse(localStorage.getItem('usuario'));
-
-    if(usuario.nombre == f.nombre && usuario.password == f.password){
-      this.router.navigate(['/principal']); 
-    }else{
-      const alert = await this.alertController.create({
-        header:'Datos Incorrectos',
-        message:'El usuario o la contraseña no son correctas',
-        buttons:['Aceptar']
-      });
-
+    if (state) {
+      this.usuario = state.usuario;
+      this.password = state.password;
     }
   }
 
+  ngOnInit() {}
+
+  iniciarSesion() {
+    if (this.usuario && this.password) {
+      
+      const extras: NavigationExtras = {
+        state: {
+          usuario: this.usuario,
+        }
+      };
+      this.router.navigate(['/inicio'], extras); 
+    } else {
+      
+      alert('Por favor, ingresa tu correo y contraseña.');
+    }
+  }
 }

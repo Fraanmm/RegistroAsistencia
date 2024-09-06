@@ -28,11 +28,14 @@ export class LoginPage implements OnInit {
 
   iniciarSesion() {
     if (this.usuario && this.password) {
+
+      this.router.navigate(['/principal']);
       
       const extras: NavigationExtras = {
         state: {
           usuario: this.usuario,
         }
+
       };
       this.router.navigate(['/inicio'], extras); 
     } else {

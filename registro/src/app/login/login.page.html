@@ -3,7 +3,7 @@
     <ion-buttons slot="start">
       <ion-back-button></ion-back-button>
     </ion-buttons>
-    <ion-title>Iniciar Sesión</ion-title>
+    <ion-title></ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -28,7 +28,7 @@
         <form (ngSubmit)="iniciarSesion()">
           <ion-list>
             <ion-item>
-              <ion-input [(ngModel)]="usuario" name="usuario" label="Correo Electrónico" type="email" placeholder="Ingrese su correo" required></ion-input>
+              <ion-input [(ngModel)]="usuario" name="usuario" label="Nombre de Usuario" type="usuario" placeholder="Ingrese su usuario" required></ion-input>
             </ion-item>
             <ion-item>
               <ion-input [(ngModel)]="password" name="password" label="Contraseña" type="password" placeholder="Ingrese su contraseña" required></ion-input>

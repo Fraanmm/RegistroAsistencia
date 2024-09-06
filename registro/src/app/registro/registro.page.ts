@@ -1,11 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import{
-  FormGroup,
-  FormControl,
-  Validators,
-  FormBuilder
-} from '@angular/forms';
-import { AlertController } from '@ionic/angular';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-registro',
@@ -14,44 +8,33 @@ import { AlertController } from '@ionic/angular';
 })
 export class RegistroPage implements OnInit {
 
-  formularioRegistro: FormGroup;
+  
+  nombreUsuario: string = '';
+  correo: string = '';
+  contrasena: string = '';
+  fechaNacimiento: string = '';
+  nivelEducacional: string = '';
 
-  constructor(public fb: FormBuilder, public alertController: AlertController ) {
-    this.formularioRegistro = this.fb.group({
-      'nombre': new FormControl("",Validators.required),
-      'password': new FormControl("",Validators.required),
-      'confirmacionPassword': new FormControl("",Validators.required)
-    });
-    
+  constructor(private router: Router) { }
 
-   }
+  ngOnInit() {}
 
-  ngOnInit() {
-  }
-
-  async guardar(){
-    var f = this.formularioRegistro.value;
-
-    if(this.formularioRegistro.invalid){
-
-      const alert = await this.alertController.create({
-        header:'Datos Incompletos',
-        message:'Todos los campos deben estar completos',
-        buttons:['Aceptar']
+  registrarUsuario() {
+    if (this.nombreUsuario && this.correo && this.contrasena && this.fechaNacimiento && this.nivelEducacional) {
+      
+      console.log('Usuario registrado:', {
+        nombreUsuario: this.nombreUsuario,
+        correo: this.correo,
+        contrasena: this.contrasena,
+        fechaNacimiento: this.fechaNacimiento,
+        nivelEducacional: this.nivelEducacional,
       });
 
-      await alert.present();
-      return;
-
+      
+      this.router.navigate(['/login']);
+    } else {
+      
+      alert('Por favor, complete todos los campos.');
     }
-
-    var usuario = {
-      nombre: f.nombre,
-      password: f.password
-    }
-
-    localStorage.setItem('usuario',JSON.stringify(usuario));
-
   }
-
 }

@@ -8,14 +8,17 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Iniciar Sesión</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <div class="video-background">
+    <video autoplay muted loop>
+      <source src="assets/img/inicio.mp4" type="video/mp4">
+      Tu navegador no soporta videos.
+    </video>
+  </div>
 
-  <div id="container">
-    <ion-card>
+  <div class="overlay"></div>
+
+  <div id="container" class="content">
+    <ion-card class="transparent-card">
       <ion-card-header>
         <ion-card-title>
           <h1>Bienvenido/a</h1>
@@ -24,11 +27,10 @@
       </ion-card-header>
 
       <ion-card-content>
-        
         <form (ngSubmit)="iniciarSesion()">
           <ion-list>
             <ion-item>
-              <ion-input [(ngModel)]="usuario" name="usuario" label="Nombre de Usuario"  type="usuario" placeholder="Ingrese su usuario" required></ion-input>
+              <ion-input [(ngModel)]="usuario" name="usuario" label="Nombre de Usuario" type="text" placeholder="Ingrese su usuario" required></ion-input>
             </ion-item>
             <ion-item>
               <ion-input [(ngModel)]="password" name="password" label="Contraseña" type="password" placeholder="Ingrese su contraseña" required></ion-input>
@@ -36,12 +38,12 @@
           </ion-list>
 
           <br>
-          <ion-button type="submit">
+          <ion-button type="submit" class="primary-button">
             Iniciar Sesión
           </ion-button>
         </form>
 
-        <ion-button expand="block" color="light" [routerLink]="['/recuperar']">
+        <ion-button expand="block" color="light" [routerLink]="['/recuperar']" class="secondary-button">
           ¿Olvidaste tu contraseña?
         </ion-button>
       </ion-card-content>
@@ -50,11 +52,13 @@
 </ion-content>
 
 <ion-footer>
-  <ion-toolbar>
+  <ion-toolbar class="transparent-footer">
     <ion-buttons slot="end">
-      <ion-button [routerLink]="['/registro']">
+      <ion-button [routerLink]="['/registro']" class="secondary-button">
         ¿No tienes cuenta? Regístrate
       </ion-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-footer>
+
+

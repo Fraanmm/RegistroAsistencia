@@ -1,100 +1,72 @@
-* {
-  font-family: 'Poppins', sans-serif;
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-body, ion-content {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 100vh;
-  background: url('https://www.geovictoria.com/hubfs/Imported_Blog_Media/gestion-del-tiempo-1-2.jpg') no-repeat center center fixed;
-  background-size: cover;
-}
-
-ion-header, ion-footer {
-  --background: rgba(255, 255, 255, 0.8);
-}
-
-#container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+.video-background {
+  position: fixed;
+  top: 0;
+  left: 0;
   width: 100%;
-  padding: 10px;
-  max-width: 380px;
-  backdrop-filter: blur(10px);
-  position: relative;
-  margin: 0 auto;
+  height: 100%;
+  z-index: -1;
+  overflow: hidden;
 }
 
-ion-card {
-  background-color: rgba(255, 255, 255, 0.9); 
+video {
+  min-width: 100%;
+  min-height: 100%;
+  object-fit: cover;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
+}
+
+.overlay {
+  display: none; 
+}
+
+ion-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 85vh;
+  padding-bottom: 10vh;
+}
+
+.transparent-card {
+  background-color: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(10px);
   border-radius: 15px;
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+  padding: 20px;
   width: 100%;
-  padding: 10px;
+  max-width: 380px;
 }
 
-ion-card-title h1 {
-  font-size: 1.5em;
-  font-weight: 700;
-  text-align: center;
+.primary-button {
+  background-color: #add8e6;
+  color: #fff;
+  font-weight: bold;
+  width: 100%;
+  border-radius: 5px;
+  margin-top: 15px;
+}
+
+.secondary-button {
+  background-color: rgba(255, 255, 255, 0.6);
   color: #090f1d;
+  font-weight: bold;
+  border-radius: 5px;
+  width: 100%;
+  margin-top: 10px;
 }
 
-ion-card-subtitle {
-  text-align: center;
-  font-size: 1em;
-  color: #555;
-  margin-bottom: 15px;
-}
-
-ion-list {
-  margin: 10px 0;
-}
-
-ion-item {
+.transparent-footer {
+  background-color: transparent !important;
+  --ion-background-color: transparent;
   --background: transparent;
-  border-bottom: 2px solid #090f1d;
-}
-
-ion-input {
-  font-size: 0.9em;
-  color: #090f1d;
-}
-
-ion-input::placeholder {
-  color: #aaa;
-}
-
-ion-button {
-  width: 100%;
-  height: 40px;
-  --border-radius: 5px;
-  --background: #090f1d;
-  --color: #fff;
-  font-size: 1rem;
-  font-weight: 600;
-}
-
-ion-button[type="submit"] {
-  margin-top: 10px;
-}
-
-ion-button[color="light"] {
-  margin-top: 10px;
-  --background: #f1f1f1;
-  --color: #090f1d;
-  --border-radius: 5px;
-  font-weight: 500;
+  box-shadow: none;
 }
 
 ion-footer ion-button {
-  --background: #f1f1f1;
-  --color: #090f1d;
-  --border-radius: 5px;
-  font-weight: 600;
+  color: white;
+  font-weight: bold;
 }

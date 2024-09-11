@@ -1,20 +1,12 @@
-.video-background {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: -1;
-    overflow: hidden;
-  }
-  
-  video {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
+/* Recuperar.page.scss */
+
+video {
     position: absolute;
     top: 0;
     left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
     z-index: -1;
   }
   
@@ -23,23 +15,48 @@
     justify-content: center;
     align-items: center;
     height: 100%;
-    z-index: 1;
   }
   
   .transparent-card {
-    background-color: rgba(255, 255, 255, 0.8);
-    backdrop-filter: blur(10px);
-    border-radius: 15px;
-    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    background: rgba(255, 255, 255, 0.8); /* Fondo blanco semitransparente */
+    border-radius: 12px;
     padding: 20px;
-    width: 100%;
-    max-width: 380px;
-    z-index: 1;
+    max-width: 90%;
+  }
+  
+  ion-card-title {
+    color: #4a90e2; /* Color pastel azul para el título */
+    text-align: center;
+    font-size: 1.2em;
+  }
+  
+  ion-input {
+    --padding-start: 16px;
+    --padding-end: 16px;
+    --border-radius: 8px;
   }
   
   ion-button {
-    --background: #e6add7; 
-    color: #000000;
-    font-weight: bold;
+    --background: #4a90e2; /* Color pastel azul para el botón */
+    --color: white;
+    --border-radius: 8px;
+    --padding-top: 12px;
+    --padding-bottom: 12px;
+  }
+  
+  ion-button:hover {
+    --background: #357abd; /* Color azul más oscuro para el hover */
+  }
+  
+  ion-card-header {
+    text-align: center;
+  }
+  
+  ion-list {
+    margin: 0;
+  }
+  
+  ion-item {
+    margin: 0;
   }
   

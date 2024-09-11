@@ -1,5 +1,3 @@
-/* Recuperar.page.scss */
-
 video {
     position: absolute;
     top: 0;
@@ -18,14 +16,14 @@ video {
   }
   
   .transparent-card {
-    background: rgba(255, 255, 255, 0.8); /* Fondo blanco semitransparente */
+    background: rgba(255, 255, 255, 0.8); 
     border-radius: 12px;
     padding: 20px;
     max-width: 90%;
   }
   
   ion-card-title {
-    color: #4a90e2; /* Color pastel azul para el título */
+    color: #4a90e2; 
     text-align: center;
     font-size: 1.2em;
   }
@@ -37,7 +35,7 @@ video {
   }
   
   ion-button {
-    --background: #4a90e2; /* Color pastel azul para el botón */
+    --background: #4a90e2; 
     --color: white;
     --border-radius: 8px;
     --padding-top: 12px;
@@ -45,7 +43,7 @@ video {
   }
   
   ion-button:hover {
-    --background: #357abd; /* Color azul más oscuro para el hover */
+    --background: #357abd; 
   }
   
   ion-card-header {

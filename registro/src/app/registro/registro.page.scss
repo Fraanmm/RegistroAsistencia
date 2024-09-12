@@ -1,5 +1,3 @@
-/* registro.page.scss */
-
 .video-background {
   position: absolute;
   top: 0;
@@ -20,20 +18,20 @@
 }
 
 ion-card {
-  background: rgba(255, 255, 255, 0.8); /* Fondo blanco semitransparente */
+  background: rgba(255, 255, 255, 0.2); 
   border-radius: 12px;
   padding: 20px;
   max-width: 90%;
 }
 
 ion-card-title h1 {
-  color: #4a90e2; /* Color pastel azul para el título */
+  color: #4a90e2; 
   text-align: center;
   font-size: 1.5em;
 }
 
 ion-card-subtitle {
-  color: #555; /* Color gris oscuro para el subtítulo */
+  color: #555; 
   text-align: center;
   font-size: 1.1em;
 }
@@ -66,7 +64,7 @@ ion-select {
 }
 
 ion-footer {
-  background: rgba(255, 255, 255, 0.9); 
+  background: rgba(255, 255, 255, 0.2); 
 }
 
 ion-footer ion-toolbar {

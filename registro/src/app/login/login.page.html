@@ -26,10 +26,10 @@
         <form (ngSubmit)="iniciarSesion()">
           <ion-list>
             <ion-item>
-              <ion-input [(ngModel)]="usuario" name="usuario" label="Nombre de Usuario" type="text" placeholder="Ingrese su usuario" required></ion-input>
+              <ion-input [(ngModel)]="usuario" labelPlacement="floating" name="usuario" label="Nombre de Usuario" type="text" placeholder="Ingrese su usuario" required></ion-input>
             </ion-item>
             <ion-item>
-              <ion-input [(ngModel)]="password" name="password" label="Contraseña" type="password" placeholder="Ingrese su contraseña" required></ion-input>
+              <ion-input [(ngModel)]="password" labelPlacement="floating" name="password" label="Contraseña" type="password" placeholder="Ingrese su contraseña" required></ion-input>
             </ion-item>
           </ion-list>
 

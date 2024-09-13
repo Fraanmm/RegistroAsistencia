@@ -1,5 +1,5 @@
 .video-background {
-  position: fixed; /* Asegura que el video esté fijo en el fondo */
+  position: fixed; 
   top: 0;
   left: 0;
   width: 100%;
@@ -16,22 +16,22 @@
 .transparent-card {
   position: relative;
   z-index: 10;
-  background-color: rgba(255, 255, 255, 0.5); /* Fondo semitransparente */
+  background-color: rgba(255, 255, 255, 0.2); 
   color: #000;
   text-align: center;
   padding: 20px;
   border-radius: 15px;
   margin-top: 20%;
-  border: 5px solid; /* Define el borde inicial */
-  animation: border-color-change 2s infinite alternate; /* Animación para cambiar el color del borde */
+  border: 5px solid; 
+  animation: border-color-change 2s infinite alternate; 
 }
 
 @keyframes border-color-change {
   from {
-    border-color: blue; /* Color inicial del borde */
+    border-color: blue; 
   }
   to {
-    border-color: var(--background); /* Color alternativo */
+    border-color: var(--background); 
   }
 }
 

@@ -33,7 +33,7 @@ export class RecuperarPage implements OnInit {
               };
 
               
-              this.router.navigate(['/principal'], navigationExtras);
+              this.router.navigate(['/login'], navigationExtras);
             }
           }
         ]

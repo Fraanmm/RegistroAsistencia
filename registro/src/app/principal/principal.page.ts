@@ -10,17 +10,15 @@ export class PrincipalPage implements OnInit {
 
   usuario: string = '';
 
-  constructor(private router: Router) {
-  
+  constructor(private router: Router) {}
+
+  ngOnInit() {
+   
     const navigation = this.router.getCurrentNavigation();
-    const state = navigation?.extras.state as { usuario: string };
-    if (state) {
-      this.usuario = state.usuario; 
+    
+    if (navigation?.extras?.state) {
+      const state = navigation.extras.state as { usuario: string };
+      this.usuario = state.usuario || '';  
     }
   }
-
-  ngOnInit() {}
-
-
-  
 }

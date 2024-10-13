@@ -4,7 +4,6 @@
   "author": "Ionic Framework",
   "homepage": "https://ionicframework.com/",
   "scripts": {
-    "start:api": "json-server --watch db.json --port 3000",
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",

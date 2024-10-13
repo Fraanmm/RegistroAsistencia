@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
-import { authGuard } from './auth.guard';
+import { authGuard } from './auth.guard'; 
 
 const routes: Routes = [
   {
@@ -10,20 +10,20 @@ const routes: Routes = [
   },
   {
     path: 'login',
-    loadChildren: () => import('./login/login.module').then( m => m.LoginPageModule)
+    loadChildren: () => import('./login/login.module').then(m => m.LoginPageModule)
   },
   {
     path: 'registro',
-    loadChildren: () => import('./registro/registro.module').then( m => m.RegistroPageModule)
+    loadChildren: () => import('./registro/registro.module').then(m => m.RegistroPageModule)
   },
   {
     path: 'principal',
-    loadChildren: () => import('./principal/principal.module').then( m => m.PrincipalPageModule),
-    canActivate: [authGuard]
+    loadChildren: () => import('./principal/principal.module').then(m => m.PrincipalPageModule),
+    canActivate: [authGuard] // Aquí se usa el authGuard
   },
   {
     path: 'recuperar',
-    loadChildren: () => import('./recuperar/recuperar.module').then( m => m.RecuperarPageModule)
+    loadChildren: () => import('./recuperar/recuperar.module').then(m => m.RecuperarPageModule)
   },
   {
     path: 'controller',

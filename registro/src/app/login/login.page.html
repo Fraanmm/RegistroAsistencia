@@ -3,7 +3,10 @@
     <ion-buttons slot="start">
       <ion-back-button></ion-back-button>
     </ion-buttons>
-    <ion-title></ion-title>
+    <ion-title>Iniciar Sesión</ion-title>
+    <ion-button [routerLink]="['/controller']" fill="clear" slot="end">
+      Admin
+    </ion-button>
   </ion-toolbar>
 </ion-header>
 
@@ -27,7 +30,7 @@
       </ion-card-header>
 
       <ion-card-content>
-        <form (ngSubmit)="iniciarSesion()">
+        <form (ngSubmit)="iniciarSesion()" #loginForm="ngForm">
           <ion-list>
             <ion-item>
               <ion-input [(ngModel)]="usuario" labelPlacement="floating" name="usuario" label="Nombre de Usuario" type="text" placeholder="Ingrese su usuario" required></ion-input>
@@ -38,7 +41,7 @@
           </ion-list>
 
           <br>
-          <ion-button type="submit" class="primary-button">
+          <ion-button type="submit" class="primary-button" [disabled]="!loginForm.valid">
             Iniciar Sesión
           </ion-button>
         </form>

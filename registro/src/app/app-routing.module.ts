@@ -6,7 +6,7 @@ import { authGuard } from './Servicios/auth.guard';
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'login', // Cambia 'home' a 'login' si esa es tu página principal
+    redirectTo: 'login', 
     pathMatch: 'full'
   },
   {
@@ -27,7 +27,7 @@ const routes: Routes = [
     loadChildren: () => import('./recuperar/recuperar.module').then(m => m.RecuperarPageModule)
   },
   {
-    path: 'error', // Asegúrate de que esta ruta esté definida correctamente
+    path: 'error', 
     loadChildren: () => import('./error/error.module').then(m => m.ErrorPageModule)
   },
   {

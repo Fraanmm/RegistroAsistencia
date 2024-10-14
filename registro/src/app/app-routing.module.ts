@@ -1,16 +1,16 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
-import { authGuard } from './auth.guard'; 
+import { authGuard } from './Servicios/auth.guard'; 
 
 const routes: Routes = [
   {
-    path: '',
-    redirectTo: 'login',
-    pathMatch: 'full'
+    path: 'login', 
+    loadChildren: () => import('./login/login.module').then(m => m.LoginPageModule)
   },
   {
-    path: 'login',
-    loadChildren: () => import('./login/login.module').then(m => m.LoginPageModule)
+    path: '',
+    redirectTo: 'login', 
+    pathMatch: 'full'
   },
   {
     path: 'registro',
@@ -19,7 +19,7 @@ const routes: Routes = [
   {
     path: 'principal',
     loadChildren: () => import('./principal/principal.module').then(m => m.PrincipalPageModule),
-    canActivate: [authGuard] // Aquí se usa el authGuard
+    canActivate: [authGuard] 
   },
   {
     path: 'recuperar',
@@ -41,4 +41,4 @@ const routes: Routes = [
   ],
   exports: [RouterModule]
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

@@ -1,16 +1,17 @@
+// app-routing.module.ts
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
-import { authGuard } from './Servicios/auth.guard'; 
+import { authGuard } from './Servicios/auth.guard';
 
 const routes: Routes = [
   {
-    path: 'login', 
-    loadChildren: () => import('./login/login.module').then(m => m.LoginPageModule)
+    path: '',
+    redirectTo: 'login', // Cambia 'home' a 'login' si esa es tu página principal
+    pathMatch: 'full'
   },
   {
-    path: '',
-    redirectTo: 'login', 
-    pathMatch: 'full'
+    path: 'login',
+    loadChildren: () => import('./login/login.module').then(m => m.LoginPageModule)
   },
   {
     path: 'registro',
@@ -19,15 +20,15 @@ const routes: Routes = [
   {
     path: 'principal',
     loadChildren: () => import('./principal/principal.module').then(m => m.PrincipalPageModule),
-    canActivate: [authGuard] 
+    canActivate: [authGuard]
   },
   {
     path: 'recuperar',
     loadChildren: () => import('./recuperar/recuperar.module').then(m => m.RecuperarPageModule)
   },
   {
-    path: 'controller',
-    loadChildren: () => import('./Admin/controller/controller.module').then(m => m.ControllerPageModule)
+    path: 'error', // Asegúrate de que esta ruta esté definida correctamente
+    loadChildren: () => import('./error/error.module').then(m => m.ErrorPageModule)
   },
   {
     path: '**',
@@ -41,4 +42,4 @@ const routes: Routes = [
   ],
   exports: [RouterModule]
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }

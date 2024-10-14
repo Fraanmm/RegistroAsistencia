@@ -1,9 +1,12 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+
 import { IonicModule } from '@ionic/angular';
+
 import { ControllerPageRoutingModule } from './controller-routing.module';
-import { ControllerPage } from './controller.page';
+
+import { ControllerPage } from '../controller.page';
 
 @NgModule({
   imports: [
@@ -12,6 +15,7 @@ import { ControllerPage } from './controller.page';
     IonicModule,
     ControllerPageRoutingModule
   ],
-  declarations: [ControllerPage]
+  declarations: [ControllerPage],
 })
-export class ControllerPageModule {}
+export class ControllerPageModule { }
+

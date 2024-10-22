@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, NavigationExtras } from '@angular/router';
+import { AuthenticatorService } from '../Servicios/authenticator.service';
 
 @Component({
   selector: 'app-login',
@@ -11,12 +12,12 @@ export class LoginPage implements OnInit {
   usuario = '';  
   password = ''; 
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, private auth:AuthenticatorService) { }
 
   ngOnInit() {}
 
   iniciarSesion() {
-    if (this.usuario && this.password) {
+    if (this.auth.login(this.usuario , this.password)) {
       console.log('Inicio de sesión exitoso');
 
       let navigationExtras: NavigationExtras = {

@@ -27,10 +27,6 @@ const routes: Routes = [
     loadChildren: () => import('./recuperar/recuperar.module').then(m => m.RecuperarPageModule)
   },
   {
-    path: 'error', 
-    loadChildren: () => import('./error/error.module').then(m => m.ErrorPageModule)
-  },
-  {
     path: '**',
     loadChildren: () => import('./error/error.module').then(m => m.ErrorPageModule)
   },

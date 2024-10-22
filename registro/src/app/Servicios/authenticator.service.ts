@@ -31,7 +31,7 @@ export class AuthenticatorService {
   //Generamos funcion para validar usuario contraseña
   //Si equivale a los datos configurados entregara valor true si no Indicara falso
   login(user: String, pass: String): boolean {
-    if (user == 'j.riquelmee' && pass == 'pass1234') {
+    if (user == 'fr.ortegau' && pass == 'pass1234') {
       this.connnectionStatus = true;
       return true;
     }

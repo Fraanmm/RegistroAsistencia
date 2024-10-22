@@ -15,6 +15,9 @@ export class RegistroPage implements OnInit {
   fechaNacimiento: string = '';
   nivelEducacional: string = '';
 
+ /*  user = {
+    "nombre"
+  } */
   constructor(private router: Router) { }
 
   ngOnInit() {}

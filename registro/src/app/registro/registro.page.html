@@ -27,21 +27,27 @@
       <ion-card-content>
         <ion-list>
           <ion-item>
-            <ion-input [(ngModel)]="nombreUsuario" label="Nombre de Usuario" labelPlacement="floating" type="text" placeholder="Ingrese su nombre de usuario"></ion-input>
+            <ion-input label="Nombre de Usuario" labelPlacement="floating" type="text" placeholder="Ingrese su nombre de usuario"></ion-input>
           </ion-item>
           <ion-item>
-            <ion-input [(ngModel)]="correo" label="Correo Electrónico" labelPlacement="floating" type="email" placeholder="Ingrese su correo"></ion-input>
+            <ion-input label="Correo Electrónico" labelPlacement="floating" type="email" placeholder="Ingrese su correo"></ion-input>
           </ion-item>
           <ion-item>
-            <ion-input [(ngModel)]="contrasena" label="Contraseña" labelPlacement="floating" type="password" placeholder="Ingrese su contraseña"></ion-input>
+            <ion-input label="Contraseña" labelPlacement="floating" type="password" placeholder="Ingrese su contraseña"></ion-input>
           </ion-item>
           <ion-item>
             <ion-label>Fecha de Nacimiento</ion-label>
-            <ion-datetime [(ngModel)]="fechaNacimiento" presentation="date"></ion-datetime>
+            <ion-datetime-button datetime="datetime"></ion-datetime-button>
+
+            <ion-modal [keepContentsMounted]="true">
+              <ng-template>
+                <ion-datetime id="datetime" presentation="date"></ion-datetime>
+              </ng-template>
+            </ion-modal>
           </ion-item>
           <ion-item>
             <ion-label>Carrera</ion-label>
-            <ion-select [(ngModel)]="nivelEducacional" interface="action-sheet" placeholder="Seleccione Carrera">
+            <ion-select interface="action-sheet" placeholder="Seleccione Carrera">
               <ion-select-option value="Ecoturismo">Ecoturismo</ion-select-option>
               <ion-select-option value="Ingenieria en Informatica">Ingenieria en Informatica</ion-select-option>
               <ion-select-option value="Turismo y Hoteleria">Turismo y Hoteleria</ion-select-option>
@@ -57,7 +63,7 @@
 
         <br>
         <ion-buttons slot="end">
-          <ion-button (click)="registrarUsuario()">
+          <ion-button [routerLink]="['/login']">
             Registrarse
           </ion-button>
         </ion-buttons>
@@ -75,3 +81,4 @@
     </ion-buttons>
   </ion-toolbar>
 </ion-footer>
+

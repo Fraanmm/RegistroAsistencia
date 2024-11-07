@@ -27,7 +27,7 @@ export class AuthenticatorService {
   }
 
   login(user: string, pass: string): boolean {
-    if (user === 'francisca' && pass === 'pass1234') {
+    if (user === 'Francisca' && pass === 'pass1234') {
       this.connnectionStatus = true;
       return true;
     }
@@ -44,13 +44,33 @@ export class AuthenticatorService {
   }
 
   async registrar(user: any): Promise<boolean> {
+    if (!user.nombre || !user.password || !user.email) {
+      console.log('Error: Datos incompletos.');
+      return false;
+    }
+
+    const emailRegex = /^[a-zA-Z0-9._%+-]+@(duoc\.cl|gmail\.com)$/;
+    if (!emailRegex.test(user.email)) {
+      console.log('Error: Correo no válido.');
+      return false;
+    }
+
+    const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}$/;
+    if (!passwordRegex.test(user.password)) {
+      console.log('Error: Contraseña inválida.');
+      return false;
+    }
+
     return this.storage.set(user.nombre, user).then((res) => {
       if (res != null) {
+        console.log('Usuario registrado correctamente.');
         return true;
       } else {
+        console.log('Error al registrar el usuario.');
         return false;
       }
     }).catch((error) => {
+      console.log('Error al registrar el usuario: ' + error);
       return false;
     });
   }

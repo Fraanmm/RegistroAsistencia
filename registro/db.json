@@ -1,18 +1,18 @@
 {
     "users": [
       {
-        "username": "fr.ortegau",
-        "email": "correo@correo.cl",
+        "username": "Francisca",
+        "email": "fr.ortegau@duocuc.cl",
         "password": "pass1234"
       },
       {
-        "username": "z.test",
-        "email": "email@gmail.com",
+        "username": "Nicolas",
+        "email": "ni.garridol@duocuc.cl",
         "password": "password1234"
       },
       {
-        "username": "i.prueba",
-        "email": "prueba@outlook.com",
+        "username": "admin",
+        "email": "admin@gmail.com",
         "password": "contraseña"
       }
     ]

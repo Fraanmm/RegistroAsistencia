@@ -8,9 +8,9 @@ import { Component } from '@angular/core';
 export class ControllerPage {
   
   users = [
-    { id: 1, username: 'fr.ortegau', email: 'correo@correo.cl', password: 'pass1234' },
-    { id: 2, username: 'z.test', email: 'email@gmail.com', password: 'password1234' },
-    { id: 3, username: 'i.prueba', email: 'prueba@outlook.com', password: 'contraseña' }
+    { id: 1, username: 'Francisca', email: 'fr.ortegau@duocuc.cl', password: 'pass1234' },
+    { id: 2, username: 'Nicolas', email: 'ni.garridol@duocuc.cl', password: 'password1234' },
+    { id: 3, username: 'Admin', email: 'admin@gmail.', password: 'admin1234' }
   ];
 
   

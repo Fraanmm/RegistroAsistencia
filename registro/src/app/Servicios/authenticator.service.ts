@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { StorageService } from './storage.service';
-import { APIControllerService } from './apicontroller.service';
 import { Router } from '@angular/router';
 
 @Injectable({
@@ -12,10 +11,8 @@ export class AuthenticatorService {
 
   constructor(
     private storage: StorageService,
-    private api: APIControllerService,
     private router: Router
   ) {
-    
     this.loadConnectionStatus();
   }
 
@@ -34,9 +31,10 @@ export class AuthenticatorService {
       const res = await this.storage.get(user);
       if (res && res.password === pass) {
         this.saveConnectionStatus(true);
+        this.router.navigate(['/principal']);  // Redirige al principal si es exitoso
         return true;
       } else {
-        return false;
+        return false;  // Si las credenciales no coinciden
       }
     } catch (error) {
       console.error('Error en el sistema:', error);
@@ -47,10 +45,11 @@ export class AuthenticatorService {
   login(user: string, pass: string): boolean {
     if (user === 'Francisca' && pass === 'pass1234') {
       this.saveConnectionStatus(true);
+      this.router.navigate(['/principal']);  // Redirige al principal si es exitoso
       return true;
     }
     this.saveConnectionStatus(false);
-    return false;
+    return false;  // Si las credenciales no coinciden
   }
 
   logout() {
@@ -73,30 +72,10 @@ export class AuthenticatorService {
   }
 
   registroAPI(user: any): Promise<boolean> {
+    // Implementación para registro en la API si es necesario
     return new Promise((resolve) => {
-      this.api.postUser(user).subscribe(
-        () => resolve(true),
-        (error) => {
-          console.error('Error en el registro de API:', error);
-          resolve(false);
-        }
-      );
+      // Lógica para registrar en la API
+      resolve(true);
     });
   }
-
-  async loginAPI(user: { username: string; password: string }): Promise<boolean> {
-    try {
-      const response = await this.api.loginUser(user).toPromise();
-      if (response && response.token) {
-        await this.storage.set('userToken', response.token); // Guardar el token en almacenamiento
-        await this.saveConnectionStatus(true);               // Actualizar estado de conexión
-        this.router.navigate(['/principal']);
-        return true;
-      }
-      return false;
-    } catch (error) {
-      console.error('Error al intentar iniciar sesión:', error);
-      return false;
-    }
-  }
-}  
+}

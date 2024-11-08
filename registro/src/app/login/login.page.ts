@@ -14,15 +14,8 @@ export class LoginPage {
   constructor(private router: Router, private auth: AuthenticatorService) {}
 
   iniciarSesion() {
-    const usuario = {
-      username: this.username,
-      password: this.password,
-    };
-  
-    this.auth.loginAPI(usuario).then((loggedIn) => {
-      if (loggedIn) {
-        this.router.navigate(['/principal'], { state: { usuario: this.username } });
-      } else {
+    this.auth.loginBDD(this.username, this.password).then((loggedIn) => {
+      if (!loggedIn) {
         alert('Usuario o contraseña incorrectos');
       }
     }).catch((error) => {
@@ -30,5 +23,4 @@ export class LoginPage {
       alert('Hubo un problema con el inicio de sesión');
     });
   }
-  
 }

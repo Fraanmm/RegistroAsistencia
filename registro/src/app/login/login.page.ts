@@ -18,10 +18,9 @@ export class LoginPage {
       username: this.username,
       password: this.password,
     };
-
+  
     this.auth.loginAPI(usuario).then((loggedIn) => {
       if (loggedIn) {
-        
         this.router.navigate(['/principal'], { state: { usuario: this.username } });
       } else {
         alert('Usuario o contraseña incorrectos');
@@ -31,5 +30,5 @@ export class LoginPage {
       alert('Hubo un problema con el inicio de sesión');
     });
   }
+  
 }
-

@@ -13,7 +13,7 @@ export class PrincipalPage implements OnInit {
   constructor(private router: Router) {}
 
   ngOnInit() {
-    
+   
     const navigation = this.router.getCurrentNavigation();
     
     if (navigation?.extras?.state) {

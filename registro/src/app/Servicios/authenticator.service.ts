@@ -31,10 +31,10 @@ export class AuthenticatorService {
       const res = await this.storage.get(user);
       if (res && res.password === pass) {
         this.saveConnectionStatus(true);
-        this.router.navigate(['/principal']);  // Redirige al principal si es exitoso
+        this.router.navigate(['/principal']);  
         return true;
       } else {
-        return false;  // Si las credenciales no coinciden
+        return false; 
       }
     } catch (error) {
       console.error('Error en el sistema:', error);
@@ -45,11 +45,11 @@ export class AuthenticatorService {
   login(user: string, pass: string): boolean {
     if (user === 'Francisca' && pass === 'pass1234') {
       this.saveConnectionStatus(true);
-      this.router.navigate(['/principal']);  // Redirige al principal si es exitoso
+      this.router.navigate(['/principal']);  
       return true;
     }
     this.saveConnectionStatus(false);
-    return false;  // Si las credenciales no coinciden
+    return false;  
   }
 
   logout() {
@@ -72,9 +72,9 @@ export class AuthenticatorService {
   }
 
   registroAPI(user: any): Promise<boolean> {
-    // Implementación para registro en la API si es necesario
+    
     return new Promise((resolve) => {
-      // Lógica para registrar en la API
+      
       resolve(true);
     });
   }

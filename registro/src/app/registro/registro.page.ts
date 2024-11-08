@@ -28,14 +28,14 @@ export class RegistroPage implements OnInit {
   }
 
   registroAPI() {
-    // Crear un objeto `user` con los campos necesarios
+    
     const user = {
       username: this.nombreUsuario,
       email: this.correo,
       password: this.contrasena,
     };
 
-    // Llamar al servicio de autenticación para registrar al usuario
+    
     this.auth.registroAPI(user)
       .then((data: boolean) => {
         if (data) {

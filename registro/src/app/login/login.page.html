@@ -1,56 +1,48 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-buttons slot="start">
-      <ion-back-button></ion-back-button>
-    </ion-buttons>
-    <ion-title>Iniciar Sesión</ion-title>
+    <ion-title>Iniciar sesión</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
+<ion-content>
   <div class="video-background">
-    <video autoplay muted loop playsinline>
-      <source src="assets/img/inicio.mp4" type="video/mp4">
-      Tu navegador no soporta videos.
+    <video autoplay muted loop id="background-video">
+      <source src="/assets/img/inicio.mp4" type="video/mp4">
+      Tu navegador no soporta videos HTML5.
     </video>
   </div>
 
-  <div id="container">
-    <ion-card>
-      <ion-card-header>
-        <ion-card-title>
-          <h1>Bienvenido de nuevo</h1>
-        </ion-card-title>
-        <ion-card-subtitle>Formulario de Inicio de Sesión</ion-card-subtitle>
-      </ion-card-header>
+  <ion-card class="transparent-card">
+    <ion-card-header>
+      <ion-card-title>Bienvenido</ion-card-title>
+    </ion-card-header>
 
-      <ion-card-content>
-        <ion-list>
-          <ion-item>
-            <ion-input [(ngModel)]="nombreUsuario" label="Nombre de Usuario" labelPlacement="floating" type="text" placeholder="Ingrese su nombre de usuario" required></ion-input>
-          </ion-item>
-          <ion-item>
-            <ion-input [(ngModel)]="contrasena" label="Contraseña" labelPlacement="floating" type="password" placeholder="Ingrese su contraseña" required></ion-input>
-          </ion-item>
-        </ion-list>
+    <ion-card-content>
+      <ion-item>
+        <ion-input
+          label="Usuario"
+          label-placement="floating"
+          type="text"
+          [(ngModel)]="username"
+          placeholder="Ingrese su nombre de usuario"
+        ></ion-input>
+      </ion-item>
 
-        <br>
-        <ion-buttons slot="end">
-          <ion-button (click)="iniciarSesion()" fill="outline">
-            Iniciar Sesión
-          </ion-button>
-        </ion-buttons>
-      </ion-card-content>
-    </ion-card>
-  </div>
+      <ion-item>
+        <ion-input
+          label="Contraseña"
+          label-placement="floating"
+          type="password"
+          [(ngModel)]="password"
+          placeholder="Ingrese su contraseña"
+        ></ion-input>
+      </ion-item>
+
+      <ion-buttons slot="end">
+        <ion-button (click)="iniciarSesion()" fill="outline">Iniciar sesión</ion-button>
+      </ion-buttons>
+    </ion-card-content>
+  </ion-card>
 </ion-content>
 
-<ion-footer>
-  <ion-toolbar>
-    <ion-buttons slot="end">
-      <ion-button [routerLink]="['/registro']">
-        ¿No tienes cuenta? Regístrate
-      </ion-button>
-    </ion-buttons>
-  </ion-toolbar>
-</ion-footer>
+    

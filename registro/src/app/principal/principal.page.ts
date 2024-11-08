@@ -15,6 +15,7 @@ export class PrincipalPage implements OnInit {
   ngOnInit() {
     
     const navigation = this.router.getCurrentNavigation();
+    
     if (navigation?.extras?.state) {
       const state = navigation.extras.state as { usuario: string };
       this.usuario = state.usuario || '';  

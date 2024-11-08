@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthenticatorService } from '../Servicios/authenticator.service';
 
@@ -7,28 +7,29 @@ import { AuthenticatorService } from '../Servicios/authenticator.service';
   templateUrl: './login.page.html',
   styleUrls: ['./login.page.scss'],
 })
-export class LoginPage implements OnInit {
-  nombreUsuario: string = '';
-  contrasena: string = '';
+export class LoginPage {
+
+  username: string = '';
+  password: string = '';
 
   constructor(private router: Router, private auth: AuthenticatorService) {}
 
-  ngOnInit() {}
+  iniciarSesion() {
+    const usuario = {
+      username: this.username,
+      password: this.password,
+    };
 
-  async iniciarSesion() {
-    if (this.nombreUsuario && this.contrasena) {
-      try {
-        const result = await this.auth.loginAPI({ username: this.nombreUsuario, password: this.contrasena });
-        if (result) {
-          this.router.navigate(['/home']);
-        } else {
-          alert('Credenciales incorrectas. Intenta nuevamente.');
-        }
-      } catch (error) {
-        console.error('Error al iniciar sesión', error);
+    this.auth.loginAPI(usuario).then((loggedIn) => {
+      if (loggedIn) {
+        
+        this.router.navigate(['/principal'], { state: { usuario: this.username } });
+      } else {
+        alert('Usuario o contraseña incorrectos');
       }
-    } else {
-      alert('Por favor, complete ambos campos.');
-    }
+    }).catch((error) => {
+      console.error('Error al intentar iniciar sesión:', error);
+      alert('Hubo un problema con el inicio de sesión');
+    });
   }
 }

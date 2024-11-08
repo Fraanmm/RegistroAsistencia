@@ -6,41 +6,12 @@
       "password": "pass1234",
       "id": "9ce4"
     },
+   
     {
-      "username": "Nicolas",
-      "email": "ni.garridol@duocuc.cl",
-      "password": "password1234",
-      "id": "0b25"
-    },
-    {
-      "username": "admin",
-      "email": "admin@gmail.com",
-      "password": "contraseña",
-      "id": "0c83"
-    },
-    {
-      "id": "4017",
-      "username": "",
-      "email": "",
-      "password": "",
-      "birthDate": "",
-      "educationLevel": ""
-    },
-    {
-      "id": "6508",
-      "username": "",
-      "email": "",
-      "password": "",
-      "birthDate": "",
-      "educationLevel": ""
-    },
-    {
-      "id": "89c4",
-      "username": "",
-      "email": "",
-      "password": "",
-      "birthDate": "",
-      "educationLevel": ""
+      "id": "35c5",
+      "username": "nicolas",
+      "email": "correp@correo.cl",
+      "password": "nicolas1234"
     }
   ]
 }

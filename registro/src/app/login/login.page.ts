@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, NavigationExtras } from '@angular/router';
+import { Router } from '@angular/router';
 import { AuthenticatorService } from '../Servicios/authenticator.service';
 
 @Component({
@@ -9,31 +9,30 @@ import { AuthenticatorService } from '../Servicios/authenticator.service';
 })
 export class LoginPage implements OnInit {
 
-  usuario = '';  
-  password = ''; 
+  nombreUsuario: string = '';
+  contrasena: string = '';
 
   constructor(private router: Router, private auth: AuthenticatorService) { }
 
   ngOnInit() {}
 
   iniciarSesion() {
-    this.auth.loginAPI({ usuario: this.usuario, password: this.password })
-      .then((data: boolean) => {  
-        if (data) {
-          console.log('Inicio de sesión exitoso');
-          let navigationExtras: NavigationExtras = {
-            state: {
-              usuario: this.usuario
-            }
-          };
-          this.router.navigate(['/principal'], navigationExtras);
-        } else {
-          alert('Hubo un problema con el inicio de sesión.');
-        }
-      })
-      .catch((error: any) => {  
-        console.error('Error durante el inicio de sesión:', error);
-        alert('Error en el servidor, intenta de nuevo más tarde.');
-      });
+    if (this.nombreUsuario && this.contrasena) {
+      // Llamamos al servicio de login para verificar las credenciales
+      this.auth.loginAPI({ username: this.nombreUsuario, password: this.contrasena })
+        .then((result) => {
+          if (result) {
+            // Si el login fue exitoso, redirigimos al usuario a la página principal
+            this.router.navigate(['/home']);
+          } else {
+            alert('Credenciales incorrectas. Intenta nuevamente.');
+          }
+        })
+        .catch((error) => {
+          console.error('Error al iniciar sesión', error);
+        });
+    } else {
+      alert('Por favor, complete ambos campos.');
+    }
   }
 }

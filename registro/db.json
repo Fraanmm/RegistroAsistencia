@@ -17,6 +17,12 @@
       "username": "admin",
       "email": "admin@correo.cl",
       "password": "admin1234"
+    },
+    {
+      "id": "c4bd",
+      "username": "persona",
+      "email": "persona@correo.cl",
+      "password": "persona1234"
     }
   ]
 }

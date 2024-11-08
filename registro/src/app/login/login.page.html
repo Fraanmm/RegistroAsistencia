@@ -4,7 +4,7 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content [fullscreen]="true">
   <div class="video-background">
     <video autoplay muted loop id="background-video">
       <source src="/assets/img/inicio.mp4" type="video/mp4">
@@ -12,37 +12,34 @@
     </video>
   </div>
 
-  <ion-card class="transparent-card">
+  <ion-card>
     <ion-card-header>
-      <ion-card-title>Bienvenido</ion-card-title>
+      <ion-card-title>Iniciar sesión</ion-card-title>
     </ion-card-header>
 
     <ion-card-content>
-      <ion-item>
-        <ion-input
-          label="Usuario"
-          label-placement="floating"
-          type="text"
-          [(ngModel)]="username"
-          placeholder="Ingrese su nombre de usuario"
-        ></ion-input>
-      </ion-item>
-
-      <ion-item>
-        <ion-input
-          label="Contraseña"
-          label-placement="floating"
-          type="password"
-          [(ngModel)]="password"
-          placeholder="Ingrese su contraseña"
-        ></ion-input>
-      </ion-item>
+      <ion-list>
+        <ion-item>
+          <ion-input label="Nombre de Usuario" labelPlacement="floating" [(ngModel)]="username" type="text" placeholder="Ingrese su nombre de usuario"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-input label="Contraseña" labelPlacement="floating" [(ngModel)]="password" type="password" placeholder="Ingrese su contraseña"></ion-input>
+        </ion-item>
+      </ion-list>
 
       <ion-buttons slot="end">
         <ion-button (click)="iniciarSesion()" fill="outline">Iniciar sesión</ion-button>
       </ion-buttons>
+
+      <ion-footer>
+        <ion-toolbar>
+          <ion-buttons slot="end">
+            <ion-button [routerLink]="['/registro']" fill="clear">
+              ¿No tienes cuenta? Registrarse
+            </ion-button>
+          </ion-buttons>
+        </ion-toolbar>
+      </ion-footer>
     </ion-card-content>
   </ion-card>
 </ion-content>
-
-    

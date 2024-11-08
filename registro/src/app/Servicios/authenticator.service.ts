@@ -10,81 +10,91 @@ export class AuthenticatorService {
 
   connnectionStatus: boolean = false;
 
-  constructor(private storage: StorageService, private api: APIControllerService, private router: Router) { }
-
-  loginBDD(user: string, pass: string): Promise<boolean> {
-    return this.storage
-      .get(user)
-      .then((res) => {
-        if (res.password === pass) {
-          this.connnectionStatus = true;
-          return true;
-        } else {
-          return false;
-        }
-      })
-      .catch((error) => {
-        console.log('Error en el sistema: ' + error);
-        return false;
-      });
+  constructor(
+    private storage: StorageService,
+    private api: APIControllerService,
+    private router: Router
+  ) {
+    // Cargar estado de conexión desde almacenamiento al iniciar
+    this.loadConnectionStatus();
   }
 
-  login(user: string, pass: string): boolean {
-    if (user === 'Francisca' && pass === 'pass1234') {
-      this.connnectionStatus = true;
-      return true;
-    }
-    this.connnectionStatus = false;
-    return false;
+  private async loadConnectionStatus() {
+    const status = await this.storage.get('connectionStatus');
+    this.connnectionStatus = status === true;
   }
 
-  logout() {
-    this.connnectionStatus = false;
+  private saveConnectionStatus(status: boolean) {
+    this.connnectionStatus = status;
+    this.storage.set('connectionStatus', status);
   }
 
-  isConected() {
-    return this.connnectionStatus;
-  }
-
-  async registrar(user: any): Promise<boolean> {
-    return this.storage.set(user.username, user).then((res) => {
-      if (res != null) {
+  async loginBDD(user: string, pass: string): Promise<boolean> {
+    try {
+      const res = await this.storage.get(user);
+      if (res && res.password === pass) {
+        this.saveConnectionStatus(true);
         return true;
       } else {
         return false;
       }
-    }).catch((error) => {
+    } catch (error) {
+      console.error('Error en el sistema:', error);
       return false;
-    });
+    }
   }
 
-  
+  login(user: string, pass: string): boolean {
+    if (user === 'Francisca' && pass === 'pass1234') {
+      this.saveConnectionStatus(true);
+      return true;
+    }
+    this.saveConnectionStatus(false);
+    return false;
+  }
+
+  logout() {
+    this.saveConnectionStatus(false);
+    this.storage.remove('userToken'); // Borra el token de usuario en el almacenamiento
+    this.router.navigate(['/login']);
+  }
+
+  isConected(): boolean {
+    return this.connnectionStatus;
+  }
+
+  async registrar(user: any): Promise<boolean> {
+    try {
+      const res = await this.storage.set(user.username, user);
+      return res != null;
+    } catch (error) {
+      console.error('Error en el registro:', error);
+      return false;
+    }
+  }
+
   registroAPI(user: any): Promise<boolean> {
-    return new Promise((respuesta) => {
+    return new Promise((resolve) => {
       this.api.postUser(user).subscribe(
-        () => respuesta(true),
-        () => respuesta(false)
+        () => resolve(true),
+        (error) => {
+          console.error('Error en el registro de API:', error);
+          resolve(false);
+        }
       );
     });
   }
 
-  
   async loginAPI(user: any): Promise<boolean> {
     return new Promise((resolve) => {
-      this.api.getUsers().subscribe(
-        (users: any[]) => {
-          const foundUser = users.find(
-            (u) => u.username === user.username && u.password === user.password
-          );
-          if (foundUser) {
-            this.storage.set('userToken', 'fake-token');  // Guardar un token simulado
-            this.connnectionStatus = true;
+      this.api.loginUser(user).subscribe(
+        async (response: any) => {
+          if (response && response.token) {
+            await this.storage.set('userToken', response.token);
+            await this.storage.set('username', user.username); // Guarda el nombre de usuario
+            this.saveConnectionStatus(true);
             resolve(true);
-
-            
-            this.router.navigate(['/principal']);
           } else {
-            console.log("Contraseña o usuario incorrectos");
             resolve(false);
           }
         },
@@ -95,4 +105,4 @@ export class AuthenticatorService {
       );
     });
   }
-}  
+}

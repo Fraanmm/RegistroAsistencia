@@ -6,12 +6,17 @@
       "password": "pass1234",
       "id": "9ce4"
     },
-   
     {
       "id": "35c5",
       "username": "nicolas",
       "email": "correp@correo.cl",
       "password": "nicolas1234"
+    },
+    {
+      "id": "5e7d",
+      "username": "admin",
+      "email": "admin@correo.cl",
+      "password": "admin1234"
     }
   ]
 }

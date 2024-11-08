@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { StorageService } from './storage.service';
 import { APIControllerService } from './apicontroller.service';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root',
@@ -9,7 +10,7 @@ export class AuthenticatorService {
 
   connnectionStatus: boolean = false;
 
-  constructor(private storage: StorageService, private api: APIControllerService) { }
+  constructor(private storage: StorageService, private api: APIControllerService, private router: Router) { }
 
   loginBDD(user: string, pass: string): Promise<boolean> {
     return this.storage
@@ -57,7 +58,7 @@ export class AuthenticatorService {
     });
   }
 
-  // Registrar un usuario en la API
+  
   registroAPI(user: any): Promise<boolean> {
     return new Promise((respuesta) => {
       this.api.postUser(user).subscribe(
@@ -67,16 +68,23 @@ export class AuthenticatorService {
     });
   }
 
-  // Método para realizar login a través de la API
-  loginAPI(user: any): Promise<boolean> {
+  
+  async loginAPI(user: any): Promise<boolean> {
     return new Promise((resolve) => {
-      this.api.loginUser(user).subscribe(
-        (response: any) => {
-          if (response.token) {
-            // Si la respuesta incluye un token, guarda el token en el almacenamiento
-            this.storage.set('userToken', response.token);
+      this.api.getUsers().subscribe(
+        (users: any[]) => {
+          const foundUser = users.find(
+            (u) => u.username === user.username && u.password === user.password
+          );
+          if (foundUser) {
+            this.storage.set('userToken', 'fake-token');  // Guardar un token simulado
+            this.connnectionStatus = true;
             resolve(true);
+
+            
+            this.router.navigate(['/principal']);
           } else {
+            console.log("Contraseña o usuario incorrectos");
             resolve(false);
           }
         },
@@ -87,4 +95,4 @@ export class AuthenticatorService {
       );
     });
   }
-}
+}  

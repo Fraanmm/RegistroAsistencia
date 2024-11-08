@@ -15,7 +15,6 @@ export class AuthenticatorService {
     private api: APIControllerService,
     private router: Router
   ) {
-    // Cargar estado de conexión desde almacenamiento al iniciar
     this.loadConnectionStatus();
   }
 
@@ -34,6 +33,7 @@ export class AuthenticatorService {
       const res = await this.storage.get(user);
       if (res && res.password === pass) {
         this.saveConnectionStatus(true);
+        this.router.navigate(['/principal']);
         return true;
       } else {
         return false;
@@ -47,6 +47,7 @@ export class AuthenticatorService {
   login(user: string, pass: string): boolean {
     if (user === 'Francisca' && pass === 'pass1234') {
       this.saveConnectionStatus(true);
+      this.router.navigate(['/principal']);
       return true;
     }
     this.saveConnectionStatus(false);
@@ -55,7 +56,6 @@ export class AuthenticatorService {
 
   logout() {
     this.saveConnectionStatus(false);
-    this.storage.remove('userToken'); // Borra el token de usuario en el almacenamiento
     this.router.navigate(['/login']);
   }
 
@@ -90,9 +90,8 @@ export class AuthenticatorService {
       this.api.loginUser(user).subscribe(
         async (response: any) => {
           if (response && response.token) {
-            await this.storage.set('userToken', response.token);
-            await this.storage.set('username', user.username); // Guarda el nombre de usuario
             this.saveConnectionStatus(true);
+            this.router.navigate(['/principal']); // Redirigir a la página principal en caso de éxito
             resolve(true);
           } else {
             resolve(false);

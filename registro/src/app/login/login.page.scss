@@ -83,35 +83,3 @@ ion-input {
   background: rgba(255, 255, 255, 0.01);
 }
 
-ion-content {
-  --background: transparent; /* Fondo transparente para todo el contenido */
-  display: flex;
-  justify-content: center; /* Centrado vertical */
-  align-items: center; /* Centrado horizontal */
-  height: 100%; /* Aseguramos que ocupe toda la pantalla */
-}
-
-ion-card {
-  background-color: rgba(255, 255, 255, 0.85); /* Fondo blanco con opacidad */
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Sombra sutil */
-  border-radius: 10px; /* Bordes redondeados */
-  width: 90%; /* Ajustamos el tamaño */
-  max-width: 400px; /* Ancho máximo */
-  padding: 20px; /* Espaciado interno */
-  display: flex;
-  flex-direction: column;
-  justify-content: center; /* Aseguramos que los elementos estén centrados */
-  align-items: center;
-}
-
-ion-footer {
-  position: absolute; /* Fijamos el footer en la parte inferior */
-  bottom: 10px;
-  width: 100%;
-}
-
-ion-buttons {
-  width: 100%;
-  display: flex;
-  justify-content: center; /* Aseguramos que el botón esté centrado */
-}

@@ -8,7 +8,6 @@ import { AuthenticatorService } from '../Servicios/authenticator.service';
   styleUrls: ['./login.page.scss'],
 })
 export class LoginPage {
-
   username: string = '';
   password: string = '';
 
@@ -33,3 +32,4 @@ export class LoginPage {
     });
   }
 }
+

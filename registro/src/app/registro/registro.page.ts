@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { AuthenticatorService } from '../Servicios/authenticator.service';
 
 @Component({
   selector: 'app-registro',
@@ -16,7 +17,9 @@ export class RegistroPage implements OnInit {
   nivelEducacional: string = '';
 
  
-  constructor(private router: Router) { }
+  constructor(private router: Router, private auth: AuthenticatorService) { }
+  
+
 
   ngOnInit() {}
 
@@ -37,5 +40,14 @@ export class RegistroPage implements OnInit {
       
       alert('Por favor, complete todos los campos.');
     }
+  }
+
+  registroAPI(){
+    this.auth.registroAPI(this.user).then((data) => {
+      console.log('Salio bien');
+    })
+    .catch((error) => {
+      console.log('Salio Mal!');
+    });
   }
 }

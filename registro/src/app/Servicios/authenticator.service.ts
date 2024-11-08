@@ -1,77 +1,56 @@
-import { Injectable } from '@angular/core';
-import { StorageService } from './storage.service';
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { ToastController } from '@ionic/angular';
+import { AuthenticatorService } from 'src/app/Servicios/authenticator.service';
 
-@Injectable({
-  providedIn: 'root',
+@Component({
+  selector: 'app-register',
+  templateUrl: './register.page.html',
+  styleUrls: ['./register.page.scss'],
 })
-export class AuthenticatorService {
-  connnectionStatus: boolean = false;
+export class RegisterPage implements OnInit {
+  user = {
+    username: '',
+    email: '',
+    password: '',
+  };
+  constructor(
+    private auth: AuthenticatorService,
+    private router: Router,
+    private toastController: ToastController
+  ) {}
 
-  constructor(private storage: StorageService) {}
+  ngOnInit() {}
 
-  loginBDD(user: string, pass: string): Promise<boolean> {
-    return this.storage
-      .get(user)
+  async registrar() {
+    this.auth
+      .registrar(this.user)
       .then((res) => {
-        if (res?.password === pass) {
-          this.connnectionStatus = true;
-          return true;
-        } else {
-          return false;
-        }
+        this.router.navigate(['/home']);
+        return this.toastController.create({
+          message: 'Registrado con exito',
+          duration: 5000,
+          position: 'bottom',
+        });
       })
+      .then((toast) => toast.present())
       .catch((error) => {
-        console.log('Error en el sistema: ' + error);
-        return false;
+        return this.toastController
+          .create({
+            message: 'Error al registrar',
+            duration: 5000,
+            position: 'bottom',
+          })
+          .then((toast) => toast.present());
       });
   }
 
-  login(user: string, pass: string): boolean {
-    if (user === 'Francisca' && pass === 'pass1234') {
-      this.connnectionStatus = true;
-      return true;
-    }
-    this.connnectionStatus = false;
-    return false;
-  }
-
-  logout() {
-    this.connnectionStatus = false;
-  }
-
-  isConected() {
-    return this.connnectionStatus;
-  }
-
-  async registrar(user: any): Promise<boolean> {
-    if (!user.nombre || !user.password || !user.email) {
-      console.log('Error: Datos incompletos.');
-      return false;
-    }
-
-    const emailRegex = /^[a-zA-Z0-9._%+-]+@(duoc\.cl|gmail\.com)$/;
-    if (!emailRegex.test(user.email)) {
-      console.log('Error: Correo no válido.');
-      return false;
-    }
-
-    const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}$/;
-    if (!passwordRegex.test(user.password)) {
-      console.log('Error: Contraseña inválida.');
-      return false;
-    }
-
-    return this.storage.set(user.nombre, user).then((res) => {
-      if (res != null) {
-        console.log('Usuario registrado correctamente.');
-        return true;
-      } else {
-        console.log('Error al registrar el usuario.');
-        return false;
-      }
-    }).catch((error) => {
-      console.log('Error al registrar el usuario: ' + error);
-      return false;
+  registroAPI(user: any): Promise<boolean>{
+    return new Promise((respuesta)=> {
+      this.api.postUser(user).subscribe(
+        () => respuesta(true),
+        () => respuesta(false)
+      );
     });
   }
 }

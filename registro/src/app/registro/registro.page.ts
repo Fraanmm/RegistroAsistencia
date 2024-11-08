@@ -9,17 +9,13 @@ import { AuthenticatorService } from '../Servicios/authenticator.service';
 })
 export class RegistroPage implements OnInit {
 
-  
   nombreUsuario: string = '';
   correo: string = '';
   contrasena: string = '';
   fechaNacimiento: string = '';
   nivelEducacional: string = '';
 
- 
   constructor(private router: Router, private auth: AuthenticatorService) { }
-  
-
 
   ngOnInit() {}
 
@@ -34,20 +30,32 @@ export class RegistroPage implements OnInit {
         nivelEducacional: this.nivelEducacional,
       });
 
-      
       this.router.navigate(['/login']);
     } else {
-      
       alert('Por favor, complete todos los campos.');
     }
   }
 
-  registroAPI(){
-    this.auth.registroAPI(this.user).then((data) => {
-      console.log('Salio bien');
-    })
-    .catch((error) => {
-      console.log('Salio Mal!');
-    });
+  registroAPI() {
+    // Crear un objeto `user` a partir de las propiedades existentes
+    const user = {
+      username: this.nombreUsuario,
+      email: this.correo,
+      password: this.contrasena,
+      birthDate: this.fechaNacimiento,
+      educationLevel: this.nivelEducacional,
+    };
+
+    this.auth.registroAPI(user)
+      .then((data: boolean) => {  // Especificado tipo `boolean` para `data`
+        if (data) {
+          console.log('Salió bien');
+        } else {
+          console.log('Hubo un problema con el registro');
+        }
+      })
+      .catch((error: any) => {  // Especificado tipo `any` para `error`
+        console.error('Error durante el registro:', error);
+      });
   }
 }

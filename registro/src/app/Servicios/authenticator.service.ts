@@ -4,16 +4,17 @@ import { ToastController } from '@ionic/angular';
 import { AuthenticatorService } from 'src/app/Servicios/authenticator.service';
 
 @Component({
-  selector: 'app-register',
-  templateUrl: './register.page.html',
-  styleUrls: ['./register.page.scss'],
+  selector: 'app-registro',
+  templateUrl: './registro.page.html',
+  styleUrls: ['./registro.page.scss'],
 })
-export class RegisterPage implements OnInit {
+export class RegistroPage implements OnInit {
   user = {
     username: '',
     email: '',
     password: '',
   };
+
   constructor(
     private auth: AuthenticatorService,
     private router: Router,
@@ -24,17 +25,21 @@ export class RegisterPage implements OnInit {
 
   async registrar() {
     this.auth
-      .registrar(this.user)
-      .then((res) => {
-        this.router.navigate(['/home']);
-        return this.toastController.create({
-          message: 'Registrado con exito',
-          duration: 5000,
-          position: 'bottom',
-        });
+      .registroAPI(this.user)
+      .then((res: boolean) => {  // Añadí tipo `boolean` a `res`
+        if (res) {
+          this.router.navigate(['/registro']);
+          return this.toastController.create({
+            message: 'Registrado con éxito',
+            duration: 5000,
+            position: 'bottom',
+          });
+        } else {
+          throw new Error('Error al registrar');  // Lanza un error si `res` es `false`
+        }
       })
       .then((toast) => toast.present())
-      .catch((error) => {
+      .catch((error: any) => {  // Añadí tipo `any` a `error`
         return this.toastController
           .create({
             message: 'Error al registrar',
@@ -43,14 +48,5 @@ export class RegisterPage implements OnInit {
           })
           .then((toast) => toast.present());
       });
-  }
-
-  registroAPI(user: any): Promise<boolean>{
-    return new Promise((respuesta)=> {
-      this.api.postUser(user).subscribe(
-        () => respuesta(true),
-        () => respuesta(false)
-      );
-    });
   }
 }

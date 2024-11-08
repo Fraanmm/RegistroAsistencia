@@ -1,52 +1,79 @@
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { ToastController } from '@ionic/angular';
-import { AuthenticatorService } from 'src/app/Servicios/authenticator.service';
+import { Injectable } from '@angular/core';
+import { StorageService } from './storage.service';
+import { APIControllerService } from './apicontroller.service';
 
-@Component({
-  selector: 'app-registro',
-  templateUrl: './registro.page.html',
-  styleUrls: ['./registro.page.scss'],
+@Injectable({
+  providedIn: 'root',
 })
-export class RegistroPage implements OnInit {
-  user = {
-    username: '',
-    email: '',
-    password: '',
-  };
+export class AuthenticatorService {
+  
+  connnectionStatus: boolean = false;
+  constructor(private storage: StorageService, private api:APIControllerService) {}
 
-  constructor(
-    private auth: AuthenticatorService,
-    private router: Router,
-    private toastController: ToastController
-  ) {}
-
-  ngOnInit() {}
-
-  async registrar() {
-    this.auth
-      .registroAPI(this.user)
-      .then((res: boolean) => {  // Añadí tipo `boolean` a `res`
-        if (res) {
-          this.router.navigate(['/registro']);
-          return this.toastController.create({
-            message: 'Registrado con éxito',
-            duration: 5000,
-            position: 'bottom',
-          });
+  loginBDD(user: string, pass: String): Promise<boolean> {
+    
+    return this.storage
+      .get(user)
+      .then((res) => {
+        
+        if (res.password == pass) {
+          this.connnectionStatus = true;
+          return true;
         } else {
-          throw new Error('Error al registrar');  // Lanza un error si `res` es `false`
+          return false;
         }
       })
-      .then((toast) => toast.present())
-      .catch((error: any) => {  // Añadí tipo `any` a `error`
-        return this.toastController
-          .create({
-            message: 'Error al registrar',
-            duration: 5000,
-            position: 'bottom',
-          })
-          .then((toast) => toast.present());
+      .catch((error) => {
+        console.log('Error en el sistema: ' + error);
+        return false;
       });
+  }
+  
+  login(user: String, pass: String): boolean {
+    if (user == 'Francisca' && pass == 'pass1234') {
+      this.connnectionStatus = true;
+      return true;
+    }
+    this.connnectionStatus = false;
+    return false;
+  }
+  
+  logout() {
+    this.connnectionStatus = false;
+  }
+  
+  isConected() {
+    return this.connnectionStatus;
+  }
+  async registrar(user: any):Promise<boolean> {
+    
+    return this.storage.set(user.username, user).then((res) => {
+        if (res != null) {
+          return true;
+        }else{
+          return false;
+        }
+      })
+      .catch((error) => {
+        return false;
+      });
+  }
+
+  registroAPI(user: any): Promise<boolean>{
+    return new Promise((respuesta)=> {
+      this.api.postUser(user).subscribe(
+        () => respuesta(true),
+        () => respuesta(false)
+      );
+    });
+  }
+
+  loginAPI(user: any): Promise<boolean> {
+    return new Promise((respuesta) => {
+      this.api.loginUser(user).subscribe(
+        () => respuesta(true),  
+        () => respuesta(false)  
+      );
+    });
   }
 }

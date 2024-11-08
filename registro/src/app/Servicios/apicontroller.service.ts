@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable, Optional } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -7,7 +7,6 @@ import { Observable } from 'rxjs';
 })
 export class APIControllerService {
 
-  /* Configuramos URL de nuestar API a consumir */
   apiURL = "http://localhost:3000";
 
   constructor(private http: HttpClient) { }
@@ -15,14 +14,21 @@ export class APIControllerService {
   getUsers(): Observable<any> {
     return this.http.get(this.apiURL + "/users");
   }
+
   postUser(data: any): Observable<any> {
     return this.http.post(this.apiURL + "/users", data);
   }
+
   updateUser(id: string, data: any): Observable<any> {
     return this.http.put(this.apiURL + "/users/" + id, data);
   }
 
   deleteUser(id: string): Observable<any> {
     return this.http.delete(this.apiURL + "/users/" + id);
+  }
+
+  loginUser(credentials: any): Observable<any> {
+    
+    return this.http.post(this.apiURL + "/login", credentials);
   }
 }

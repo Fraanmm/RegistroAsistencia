@@ -35,35 +35,11 @@
           <ion-item>
             <ion-input label="Contraseña" labelPlacement="floating" type="password" placeholder="Ingrese su contraseña"></ion-input>
           </ion-item>
-          <ion-item>
-            <ion-label>Fecha de Nacimiento</ion-label>
-            <ion-datetime-button datetime="datetime"></ion-datetime-button>
-
-            <ion-modal [keepContentsMounted]="true">
-              <ng-template>
-                <ion-datetime id="datetime" presentation="date"></ion-datetime>
-              </ng-template>
-            </ion-modal>
-          </ion-item>
-          <ion-item>
-            <ion-label>Carrera</ion-label>
-            <ion-select interface="action-sheet" placeholder="Seleccione Carrera">
-              <ion-select-option value="Ecoturismo">Ecoturismo</ion-select-option>
-              <ion-select-option value="Ingenieria en Informatica">Ingenieria en Informatica</ion-select-option>
-              <ion-select-option value="Turismo y Hoteleria">Turismo y Hoteleria</ion-select-option>
-              <ion-select-option value="Técnico en Informatica">Técnico en Informatica</ion-select-option>
-              <ion-select-option value="Ingenieria en Administracion">Ingenieria en Administracion</ion-select-option>
-              <ion-select-option value="Ingenieria en Redes y Telecomunicaciones">Ingenieria en Redes y Telecomunicaciones</ion-select-option>
-              <ion-select-option value="Gastronomia Internacional">Gastronomia Internacional</ion-select-option>
-              <ion-select-option value="Ingenieria en Infrastructuras Tecnologicas">Ingenieria en Infrastructuras Tecnologicas</ion-select-option>
-              <ion-select-option value="Auditoria">Auditoria</ion-select-option>
-            </ion-select>
-          </ion-item>
         </ion-list>
 
         <br>
         <ion-buttons slot="end">
-          <ion-button (click)="registrarAPI()" fill="outline">
+          <ion-button (click)="registroAPI()" fill="outline">
             Registrarse
           </ion-button>
         </ion-buttons>

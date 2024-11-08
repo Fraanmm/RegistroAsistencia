@@ -8,7 +8,7 @@ export class StorageService {
   private bdd: Storage = new Storage();
   private bddStatus: Promise<void>;
 
-  // Inicializar el almacenamiento
+
   constructor(private storage: Storage) {
     this.bddStatus = this.onInit();
   }

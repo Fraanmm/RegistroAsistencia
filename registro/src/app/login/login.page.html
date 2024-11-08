@@ -41,9 +41,11 @@
           </ion-list>
 
           <br>
-          <ion-button type="submit" class="primary-button" [disabled]="!loginForm.valid">
-            Iniciar Sesión
-          </ion-button>
+          <ion-buttons slot="end">
+            <ion-button (click)="iniciarSesion()" fill="outline">
+             Iniciar Sesion
+            </ion-button>
+          </ion-buttons>
         </form>
 
         <ion-button expand="block" color="light" [routerLink]="['/recuperar']" class="secondary-button">

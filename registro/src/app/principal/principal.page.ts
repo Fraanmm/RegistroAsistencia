@@ -9,7 +9,7 @@ import { AuthenticatorService } from '../Servicios/authenticator.service';
 })
 export class PrincipalPage implements OnInit {
 
-  usuario: string = '';
+  username: string = '';
   asignaturas: { nombre: string, imagen: string }[] = [
     { nombre: 'Programación AP', imagen: 'assets/img/pam.jpg' },
     { nombre: 'Ética', imagen: 'assets/img/etica.jpg' },
@@ -23,8 +23,8 @@ export class PrincipalPage implements OnInit {
   ngOnInit() {
     const navigation = this.router.getCurrentNavigation();
     if (navigation?.extras?.state) {
-      const state = navigation.extras.state as { usuario: string };
-      this.usuario = state.usuario || '';
+      const state = navigation.extras.state as { username: string };
+      this.username = state.username || '';
     }
   }
 

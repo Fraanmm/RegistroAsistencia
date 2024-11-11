@@ -11,9 +11,9 @@ export class PrincipalPage implements OnInit {
 
   usuario: string = '';
   asignaturas: { nombre: string, imagen: string }[] = [
-    { nombre: 'Programación de Aplicaciones Móviles', imagen: 'assets/img/pam.jpg' },
+    { nombre: 'Programación AP', imagen: 'assets/img/pam.jpg' },
     { nombre: 'Ética', imagen: 'assets/img/etica.jpg' },
-    { nombre: 'Programación Base de Datos', imagen: 'assets/img/pbd.jpg' },
+    { nombre: 'Programación BD', imagen: 'assets/img/pbd.jpg' },
     { nombre: 'Arquitectura', imagen: 'assets/img/arqui.jpg' }
   ]; 
   qrData: string | null = null; 

@@ -15,7 +15,9 @@ export class LoginPage {
 
   iniciarSesion() {
     this.auth.loginBDD(this.username, this.password).then((loggedIn) => {
-      if (!loggedIn) {
+      if (loggedIn) {
+        this.router.navigate(['/principal'], { state: { usuario: this.username } });
+      } else {
         alert('Usuario o contraseña incorrectos');
       }
     }).catch((error) => {

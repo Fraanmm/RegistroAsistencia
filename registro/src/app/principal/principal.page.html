@@ -18,13 +18,31 @@
   <ion-card class="transparent-card">
     <ion-card-header>
       <ion-card-title>
-        <h1>Bienvenido/a {{usuario}}</h1> 
+        <h1>Bienvenido/a {{ usuario }}</h1>
       </ion-card-title>
     </ion-card-header>
 
     <ion-card-content>
-      
+      <ion-list>
+        <ion-item *ngFor="let asignatura of asignaturas">
+          <ion-thumbnail slot="start">
+            <img [src]="asignatura.imagen" alt="{{ asignatura.nombre }}" />
+          </ion-thumbnail>
+          <ion-label>{{ asignatura.nombre }}</ion-label>
+          <ion-button slot="end" (click)="generarQR()">Generar QR</ion-button>
+        </ion-item>
+      </ion-list>
+
+      <div *ngIf="qrData">
+        <ion-card>
+          <ion-card-header>
+            <ion-card-title>Código QR</ion-card-title>
+          </ion-card-header>
+          <ion-card-content>
+            <img [src]="qrData" alt="Código QR" style="width: 100%; height: auto;" />
+          </ion-card-content>
+        </ion-card>
+      </div>
     </ion-card-content>
   </ion-card>
 </ion-content>
-

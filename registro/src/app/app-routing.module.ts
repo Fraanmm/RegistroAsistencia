@@ -21,7 +21,7 @@ const routes: Routes = [
     path: 'principal',
     loadChildren: () => import('./principal/principal.module').then(m => m.PrincipalPageModule),
     canActivate: [authGuard]
-  },
+  },  
   {
     path: 'recuperar',
     loadChildren: () => import('./recuperar/recuperar.module').then(m => m.RecuperarPageModule)
@@ -30,6 +30,7 @@ const routes: Routes = [
     path: '**',
     loadChildren: () => import('./error/error.module').then(m => m.ErrorPageModule)
   },
+  
 ];
 
 @NgModule({

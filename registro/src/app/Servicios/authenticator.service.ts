@@ -1,16 +1,17 @@
 import { Injectable } from '@angular/core';
 import { StorageService } from './storage.service';
+import { APIControllerService } from './apicontroller.service';
 import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthenticatorService {
-
   connnectionStatus: boolean = false;
 
   constructor(
     private storage: StorageService,
+    private api: APIControllerService,
     private router: Router
   ) {
     this.loadConnectionStatus();
@@ -31,10 +32,11 @@ export class AuthenticatorService {
       const res = await this.storage.get(user);
       if (res && res.password === pass) {
         this.saveConnectionStatus(true);
-        this.router.navigate(['/principal']);  
+        this.router.navigate(['/principal']);
         return true;
       } else {
-        return false; 
+        // Si no está en almacenamiento local, prueba con la API
+        return this.loginAPI({ username: user, password: pass });
       }
     } catch (error) {
       console.error('Error en el sistema:', error);
@@ -42,14 +44,19 @@ export class AuthenticatorService {
     }
   }
 
-  login(user: string, pass: string): boolean {
-    if (user === 'Francisca' && pass === 'pass1234') {
-      this.saveConnectionStatus(true);
-      this.router.navigate(['/principal']);  
-      return true;
+  async loginAPI(credentials: { username: string; password: string }): Promise<boolean> {
+    try {
+      const response = await this.api.loginUser(credentials).toPromise();
+      if (response) {
+        this.saveConnectionStatus(true);
+        this.router.navigate(['/principal']);
+        return true;
+      }
+      return false;
+    } catch (error) {
+      console.error('Error al intentar iniciar sesión:', error);
+      return false;
     }
-    this.saveConnectionStatus(false);
-    return false;  
   }
 
   logout() {
@@ -72,10 +79,15 @@ export class AuthenticatorService {
   }
 
   registroAPI(user: any): Promise<boolean> {
-    
     return new Promise((resolve) => {
-      
-      resolve(true);
+      this.api.postUser(user).subscribe(
+        () => resolve(true),
+        (error) => {
+          console.error('Error en el registro de API:', error);
+          resolve(false);
+        }
+      );
     });
   }
 }
+

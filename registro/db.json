@@ -7,22 +7,16 @@
       "id": "9ce4"
     },
     {
-      "id": "35c5",
-      "username": "nicolas",
-      "email": "correp@correo.cl",
+      "id": "145b",
+      "username": "Nicolas",
+      "email": "nicolas@correo.cl",
       "password": "nicolas1234"
     },
     {
-      "id": "5e7d",
-      "username": "admin",
-      "email": "admin@correo.cl",
-      "password": "admin1234"
-    },
-    {
-      "id": "6cd5",
-      "username": "persona2",
-      "email": "personita@correo.cl",
-      "password": "persona12345"
+      "id": "86d2",
+      "username": "pepito",
+      "email": "pepito@correo.cl",
+      "password": "pepito12345"
     }
   ]
 }

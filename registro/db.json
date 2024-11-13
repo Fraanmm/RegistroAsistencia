@@ -11,6 +11,24 @@
       "username": "Nicolas",
       "email": "nicolas@correo.cl",
       "password": "nicolas1234"
+    },
+    {
+      "id": "d95d",
+      "username": "Pedrito",
+      "email": "pedrito@correo.cl",
+      "password": "pedrito"
+    },
+    {
+      "id": "28d0",
+      "username": "admin",
+      "email": "admin@admin.cl",
+      "password": "admin"
+    },
+    {
+      "id": "fcba",
+      "username": "juan soto",
+      "email": "aaa",
+      "password": "qwerty"
     }
   ]
 }

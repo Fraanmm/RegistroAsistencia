@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { NavigationExtras, Router } from '@angular/router';
 import { AuthenticatorService } from '../Servicios/authenticator.service';
 
 @Component({
@@ -14,15 +14,21 @@ export class LoginPage {
   constructor(private router: Router, private auth: AuthenticatorService) {}
 
   iniciarSesion() {
-    this.auth.loginBDD(this.username, this.password).then((loggedIn) => {
-      if (loggedIn) {
-        this.router.navigate(['/principal'], { state: { usuario: this.username } });
-      } else {
-        alert('Usuario o contraseña incorrectos');
-      }
-    }).catch((error) => {
-      console.error('Error al intentar iniciar sesión:', error);
-      alert('Hubo un problema con el inicio de sesión');
-    });
+    this.auth
+      .loginBDD(this.username, this.password)
+      .then((loggedIn) => {
+        if (loggedIn) {
+          let navExtras: NavigationExtras = {
+            state: { usuario: this.username },
+          };
+          this.router.navigate(['/principal'],navExtras);
+        } else {
+          alert('Usuario o contraseña incorrectos');
+        }
+      })
+      .catch((error) => {
+        console.error('Error al intentar iniciar sesión:', error);
+        alert('Hubo un problema con el inicio de sesión');
+      });
   }
 }

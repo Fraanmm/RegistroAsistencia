@@ -22,9 +22,11 @@ export class PrincipalPage implements OnInit {
 
   ngOnInit() {
     const navigation = this.router.getCurrentNavigation();
+
+    const state = navigation?.extras.state as { usuario: '' };
+    console.log(state.usuario)
     if (navigation?.extras?.state) {
-      const state = navigation.extras.state as { username: string };
-      this.username = state.username || '';
+      this.username = state.usuario || '';
     }
   }
 

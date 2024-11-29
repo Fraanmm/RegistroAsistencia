@@ -1,16 +1,16 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-back-button (click)="onBackNavigation($event)"></ion-back-button>
+      <ion-back-button defaultHref="/login"></ion-back-button>
     </ion-buttons>
-    <ion-title>Bienvenido</ion-title>
+    <ion-title>Página Principal</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
   <div class="video-background">
     <video autoplay muted loop id="background-video">
-      <source src="assets/img/bienvenido.mp4" type="video/mp4">
+      <source src="assets/img/bienvenido.mp4" type="video/mp4" />
       Tu navegador no soporta videos HTML5.
     </video>
   </div>
@@ -29,20 +29,42 @@
             <img [src]="asignatura.imagen" alt="{{ asignatura.nombre }}" />
           </ion-thumbnail>
           <ion-label>{{ asignatura.nombre }}</ion-label>
-          <ion-button slot="end" (click)="generarQR()">Generar QR</ion-button>
+          <ion-button slot="end" fill="outline" (click)="abrirEscanerQR()">Leer QR</ion-button>
         </ion-item>
       </ion-list>
 
-      <div *ngIf="qrData">
+      <!-- Mostrar el resultado del escaneo del código QR -->
+      <div *ngIf="scannedCode">
         <ion-card>
           <ion-card-header>
-            <ion-card-title>Código QR</ion-card-title>
+            <ion-card-title>Resultado del Código QR</ion-card-title>
           </ion-card-header>
           <ion-card-content>
-            <img [src]="qrData" alt="Código QR" style="width: 100%; height: auto;" />
+            <p>{{ scannedCode }}</p>
           </ion-card-content>
         </ion-card>
       </div>
     </ion-card-content>
   </ion-card>
+
+  <!-- Modal para el escáner QR -->
+  <ion-modal [isOpen]="modalVisible" (didDismiss)="cerrarEscanerQR()">
+    <ng-template>
+      <div>
+        <ion-header>
+          <ion-toolbar>
+            <ion-title>Escanear Código QR</ion-title>
+            <ion-buttons slot="end">
+              <ion-button (click)="cerrarEscanerQR()">Cerrar</ion-button>
+            </ion-buttons>
+          </ion-toolbar>
+        </ion-header>
+        <ion-content>
+          <zxing-scanner
+            (scanSuccess)="onCodeScanned($event)">
+          </zxing-scanner>
+        </ion-content>
+      </div>
+    </ng-template>
+  </ion-modal>
 </ion-content>

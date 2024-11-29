@@ -10,6 +10,7 @@ import { AuthenticatorService } from '../Servicios/authenticator.service';
 export class LoginPage {
   username: string = '';
   password: string = '';
+  isLoginVisible: boolean = true;  // Propiedad para controlar la visibilidad del login
 
   constructor(private router: Router, private auth: AuthenticatorService) {}
 
@@ -18,10 +19,11 @@ export class LoginPage {
       .loginBDD(this.username, this.password)
       .then((loggedIn) => {
         if (loggedIn) {
+          this.isLoginVisible = false;  // Ocultar el login después del inicio de sesión exitoso
           let navExtras: NavigationExtras = {
             state: { usuario: this.username },
           };
-          this.router.navigate(['/principal'],navExtras);
+          this.router.navigate(['/principal'], navExtras);
         } else {
           alert('Usuario o contraseña incorrectos');
         }

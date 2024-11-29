@@ -8,6 +8,9 @@ import { AppRoutingModule } from './app-routing.module';
 import { IonicStorageModule } from '@ionic/storage-angular';
 import { provideHttpClient } from '@angular/common/http';
 
+// Importa el plugin del Barcode Scanner
+import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
+
 @NgModule({
   declarations: [AppComponent],
   imports: [
@@ -18,9 +21,9 @@ import { provideHttpClient } from '@angular/common/http';
   ],
   providers: [
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
-    provideHttpClient(), 
+    provideHttpClient(),
+    BarcodeScanner, // Añade el BarcodeScanner a los providers
   ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
-

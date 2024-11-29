@@ -1,34 +1,99 @@
 {
   "users": [
     {
+      "id": "9ce4",
       "username": "Francisca",
       "email": "fr.ortegau@duocuc.cl",
       "password": "pass1234",
-      "id": "9ce4"
+      "asignaturas": [
+        {
+          "id": 1,
+          "nombre": "Programacion de Aplicaciones Moviles",
+          "imagen": "assets/img/pam.jpg",
+          "descripcion": "programacion",
+          "profesor": "Juan Perez",
+          "horario": "Lunes y Miércoles, 10:00 - 12:00"
+        },
+        {
+          "id": 2,
+          "nombre": "Etica para el Trabajo",
+          "imagen": "assets/img/etica.jpg",
+          "descripcion": "Etica",
+          "profesor": "Ana Sánchez",
+          "horario": "Martes y Jueves, 09:00 - 11:00"
+        },
+        {
+          "id": 3,
+          "nombre": "Arquitectura",
+          "imagen": "assets/img/arqui.jpg",
+          "descripcion": "Arquitectura",
+          "profesor": "Ana Sánchez",
+          "horario": "Martes y Jueves, 09:00 - 11:00"
+        }
+      ]
     },
     {
       "id": "145b",
       "username": "Nicolas",
       "email": "nicolas@correo.cl",
-      "password": "nicolas1234"
+      "password": "nicolas1234",
+      "asignaturas": [
+        {
+          "id": 1,
+          "nombre": "Etica",
+          "imagen": "assets/img/etica.jpg",
+          "descripcion": "Exploración de los eventos históricos a lo largo de los siglos.",
+          "profesor": "Luis Pérez",
+          "horario": "Viernes, 08:00 - 10:00"
+        },
+        {
+          "id": 2,
+          "nombre": "Programacion Base de Datos",
+          "imagen": "assets/img/pbd.jpg",
+          "descripcion": "Programacion BD",
+          "profesor": "Pedro Pascal",
+          "horario": "Martes y Jueves, 10:00 - 13:00"
+        }
+      ]
     },
     {
       "id": "d95d",
       "username": "Pedrito",
       "email": "pedrito@correo.cl",
-      "password": "pedrito"
+      "password": "pedrito",
+      "asignaturas": [
+        {
+          "id": 1,
+          "nombre": "Programacion Aplicaciones Moviles",
+          "imagen": "assets/img/pam.jpg",
+          "descripcion": "Programacion",
+          "profesor": "Juan Pérez",
+          "horario": "Lunes y Miércoles, 14:00 - 16:00"
+        }
+      ]
     },
     {
       "id": "28d0",
       "username": "admin",
       "email": "admin@admin.cl",
-      "password": "admin"
+      "password": "admin",
+      "asignaturas": []
     },
     {
       "id": "fcba",
       "username": "juan soto",
       "email": "aaa",
-      "password": "qwerty"
+      "password": "qwerty",
+      "asignaturas": [
+        {
+          "id": 1,
+          "nombre": "Arquitectura",
+          "imagen": "assets/img/arqui.jpg",
+          "descripcion": "Arquitectura",
+          "profesor": "Andrea Fernández",
+          "horario": "Martes, 10:00 - 12:00"
+        }
+      ]
     }
   ]
 }

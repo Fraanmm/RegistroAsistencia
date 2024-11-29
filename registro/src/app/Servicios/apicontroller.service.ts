@@ -9,7 +9,7 @@ import { map, catchError } from 'rxjs/operators';
 export class APIControllerService {
 
   //apiURL = "http://localhost:3000"; // URL de tu servidor json-server
-  apiURL = "https://8tvqq7bk-3000.brs.devtunnels.ms"
+  apiURL = "https://8tvqq7bk-3000.brs.devtunnels.ms" //
   constructor(private http: HttpClient) { }
 
   // Obtener todos los usuarios (no recomendado para producción)

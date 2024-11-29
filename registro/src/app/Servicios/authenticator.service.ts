@@ -89,5 +89,30 @@ export class AuthenticatorService {
       );
     });
   }
+
+  // NUEVO MÉTODO: Obtener el usuario y sus asignaturas
+  async obtenerUsuario(username: string): Promise<any> {
+    try {
+      // Intentar obtener al usuario desde el almacenamiento local
+      const usuarioLocal = await this.storage.get(username);
+      if (usuarioLocal) {
+        return usuarioLocal;
+      }
+
+      // Si no está en almacenamiento local, buscar en la API
+      const usuariosAPI = await this.api.getUsers().toPromise();
+      const usuarioAPI = usuariosAPI.find((user: any) => user.username === username);
+      if (usuarioAPI) {
+        return usuarioAPI;
+      }
+
+      // Si no se encuentra el usuario
+      return null;
+    } catch (error) {
+      console.error('Error al obtener usuario:', error);
+      return null;
+    }
+  }
 }
+
 

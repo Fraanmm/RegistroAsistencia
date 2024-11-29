@@ -1,4 +1,4 @@
-import { Component, OnInit, HostListener } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthenticatorService } from '../Servicios/authenticator.service';
 
@@ -8,41 +8,65 @@ import { AuthenticatorService } from '../Servicios/authenticator.service';
   styleUrls: ['./principal.page.scss'],
 })
 export class PrincipalPage implements OnInit {
-
   username: string = '';
-  asignaturas: { nombre: string, imagen: string }[] = [
-    { nombre: 'Programación AP', imagen: 'assets/img/pam.jpg' },
-    { nombre: 'Ética', imagen: 'assets/img/etica.jpg' },
-    { nombre: 'Programación BD', imagen: 'assets/img/pbd.jpg' },
-    { nombre: 'Arquitectura', imagen: 'assets/img/arqui.jpg' }
-  ]; 
-  qrData: string | null = null; 
+  asignaturas: any[] = [];
+  scannedCode: string | null = null;
+  modalVisible: boolean = false;
 
   constructor(private router: Router, private auth: AuthenticatorService) {}
 
   ngOnInit() {
-    const navigation = this.router.getCurrentNavigation();
+    this.solicitarPermisosCamara();
 
-    const state = navigation?.extras.state as { usuario: '' };
-    console.log(state.usuario)
-    if (navigation?.extras?.state) {
-      this.username = state.usuario || '';
+    const nav = this.router.getCurrentNavigation();
+    const state = nav?.extras?.state;
+
+    if (state && state['usuario']) {
+      this.username = state['usuario'];
+      this.cargarAsignaturas(this.username);
+    } else {
+      console.error('Usuario no encontrado en la navegación.');
+      this.router.navigate(['/login']); // Redirige al login si no hay usuario
     }
   }
 
-  @HostListener('window:popstate', ['$event'])
-  async onBackNavigation(event: Event) {
-    event.preventDefault();
-    const confirmLogout = confirm('¿Estás seguro de que quieres cerrar sesión?');
-    if (confirmLogout) {
-      this.auth.logout();
-      this.router.navigate(['/login']);
+  async solicitarPermisosCamara() {
+    try {
+      const stream = await navigator.mediaDevices.getUserMedia({ video: true });
+      stream.getTracks().forEach(track => track.stop()); // Detiene el acceso después de verificar
+    } catch (error) {
+      console.error('Permiso para acceder a la cámara denegado o no disponible:', error);
+      alert('Por favor, habilita el permiso para acceder a la cámara.');
     }
   }
 
-  generarQR() {
-   
-    this.qrData = 'assets/img/qr.png'; 
+  async cargarAsignaturas(username: string) {
+    try {
+      const usuario = await this.auth.obtenerUsuario(username);
+      if (usuario && usuario.asignaturas && usuario.asignaturas.length > 0) {
+        this.asignaturas = usuario.asignaturas;
+      } else {
+        console.warn('Usuario no encontrado o sin asignaturas.');
+        alert('No se encontraron asignaturas para este usuario.');
+      }
+    } catch (error) {
+      console.error('Error al cargar asignaturas:', error);
+      alert('Hubo un problema al cargar las asignaturas.');
+    }
+  }
+
+  abrirEscanerQR() {
+    this.modalVisible = true; // Abre el modal del escáner
+  }
+
+  cerrarEscanerQR() {
+    this.modalVisible = false; // Cierra el modal del escáner
+  }
+
+  onCodeScanned(result: string) {
+    this.scannedCode = result; // Almacena el resultado del código QR
+    console.log('Código QR escaneado:', result);
+    this.cerrarEscanerQR(); // Cierra el escáner después del escaneo
   }
 }
 
